@@ -36,3 +36,21 @@ SELECT
     ERROR_LINE() AS ErrorLine,
     ERROR_MESSAGE() AS ErrorMessage;
 END CATCH
+--Update Data in AddressBook Database
+CREATE PROCEDURE SPUpdateDataInDB(
+@FirstName VARCHAR(30),
+@City VARCHAR(20),
+@State VARCHAR(20)
+)
+As
+Begin Try
+UPDATE AddressBookADO SET City=@City,State=@State WHERE FirstName=@FirstName
+End Try
+Begin Catch
+SELECT
+    ERROR_NUMBER() AS ErrorNumber,
+    ERROR_STATE() AS ErrorState,
+    ERROR_PROCEDURE() AS ErrorProcedure,
+    ERROR_LINE() AS ErrorLine,
+    ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
